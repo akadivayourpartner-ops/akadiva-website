@@ -27,3 +27,16 @@
 @media(max-width:620px){
   .container{width:min(100% - 28px,1180px)}.nav-wrap{height:68px}.hero,.hero-inner{min-height:auto}.hero-copy{padding:70px 0 0}.hero h1{font-size:44px}.hero-lead{font-size:15px}.hero-visual{min-height:360px}.desk-card{transform:none}.workspace{height:300px}.laptop{width:230px;top:60px}.screen{height:150px}.paper-back{left:15px;top:45px;transform:scale(.8) rotate(-7deg)}.paper-front{right:5px;bottom:25px;transform:scale(.8) rotate(6deg)}.stats{grid-template-columns:1fr 1fr}.stats div{border-bottom:1px solid var(--line)}.section{padding:75px 0}.section-heading{display:block}.section-intro{margin-top:20px}.service-grid,.benefit-grid,.portfolio-grid,.price-cards{grid-template-columns:1fr}.portfolio-card:first-child{grid-column:auto}.benefit{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}.pricing-box{padding:30px 22px}.pricing-copy h2,.faq-wrap h2{font-size:37px}.cta-section h2{font-size:39px}.footer-top{grid-template-columns:1fr 1fr;gap:30px}.footer-brand{grid-column:1/-1}.footer-bottom{display:block}.footer-bottom span{display:block;margin:4px 0}.hero-actions .btn{width:100%}
 }
+/* AKADIVA logo baru */
+.brand-logo-img {
+  width: 190px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .brand-logo-img {
+    width: 145px;
+  }
+}
