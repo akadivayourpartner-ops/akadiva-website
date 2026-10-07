@@ -52,7 +52,6 @@
 </head>
 <body>
 
-  <!-- Logo mark (dipakai ulang di navbar & footer) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
       <symbol id="logo-mark" viewBox="0 0 100 92">
@@ -85,14 +84,6 @@
         <a class="btn btn--primary nav__cta-mobile" href="#kontak" data-wa>Konsultasi sekarang</a>
       </nav>
 
-      <a class="btn btn--primary btn--lg" href="#layanan">
-  Lihat layanan &amp; harga
-</a>
-
-<a class="btn btn--ghost btn--lg" href="#kontak" data-wa>
-  Chat WhatsApp
-</a>
-
       <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="menu" aria-label="Buka menu">
         <span></span><span></span><span></span>
       </button>
@@ -101,7 +92,6 @@
 
   <main id="konten" aria-label="Bantuan tugas kuliah, makalah, skripsi, dan pendampingan akademik">
 
-    <!-- ========== HERO ========== -->
     <section class="hero" id="beranda">
       <div class="hero__bg" aria-hidden="true">
         <svg viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice">
@@ -119,8 +109,8 @@
             secara profesional, praktis, dan bertanggung jawab. Dari proposal sampai sidang, kamu tidak berjalan sendirian.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary btn--lg" href="#kontak" data-wa>Konsultasi sekarang</a>
-            <a class="btn btn--ghost btn--lg" href="#layanan">Lihat layanan</a>
+            <a class="btn btn--primary btn--lg" href="#layanan">Lihat layanan &amp; harga</a>
+            <a class="btn btn--ghost btn--lg" href="#kontak" data-wa>Chat WhatsApp</a>
           </div>
           <ul class="hero__chips" aria-label="Nilai AKADIVA">
             <li>Profesional</li>
@@ -130,7 +120,6 @@
           </ul>
         </div>
 
-        <!-- Ilustrasi alur pendampingan -->
         <div class="hero__visual" aria-hidden="true">
           <svg class="hero__logo-ghost"><use href="#logo-mark"/></svg>
 
@@ -140,12 +129,8 @@
               <span class="card__file">Skripsi_Bab-3.docx</span>
             </div>
             <div class="doc-lines">
-              <i style="width:62%"></i>
-              <i style="width:94%"></i>
-              <i style="width:88%"></i>
-              <i class="hl" style="width:72%"></i>
-              <i style="width:91%"></i>
-              <i style="width:46%"></i>
+              <i style="width:62%"></i><i style="width:94%"></i><i style="width:88%"></i>
+              <i class="hl" style="width:72%"></i><i style="width:91%"></i><i style="width:46%"></i>
             </div>
             <div class="doc-comment">
               <b>Catatan reviewer</b>
@@ -169,411 +154,165 @@
       </div>
     </section>
 
-   <!-- ========== LAYANAN ========== -->
-<section class="section" id="layanan">
-  <div class="wrap">
-    <div class="section__head">
-      <h2>Bantuan tugas kuliah, makalah &amp; skripsi untuk setiap tahap studimu</h2>
-      <p>Pilih layanan yang sesuai dengan kebutuhanmu. Setelah itu, ceritakan kebutuhanmu dan lanjutkan konsultasi melalui WhatsApp.</p>
-    </div>
-
-    <div class="services">
-
-      <!-- THESIS SUPPORT -->
-      <article class="service service--feature">
-        <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 19.500V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2"/>
-          <path d="M8 7h6M8 11h8"/>
-        </svg>
-
-        <h3>Thesis Support</h3>
-
-        <p>
-          Pendampingan proposal, skripsi, dan tesis: merumuskan masalah,
-          menyusun kerangka, metodologi, revisi, hingga persiapan sidang.
-        </p>
-
-        <ul>
-          <li>Pemetaan topik &amp; kerangka</li>
-          <li>Pendampingan per bab</li>
-          <li>Persiapan revisi dan sidang</li>
-        </ul>
-
-        <div class="service__price">
-          <span>Mulai dari</span>
-          <strong>Rp80.000</strong>
+    <section class="section" id="layanan">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Bantuan tugas kuliah, makalah &amp; skripsi untuk setiap tahap studimu</h2>
+          <p>Pilih layanan yang sesuai dengan kebutuhanmu. Setelah itu, ceritakan kebutuhanmu dan lanjutkan konsultasi melalui WhatsApp.</p>
         </div>
 
-        <button
-          class="btn btn--primary service__btn"
-          type="button"
-          data-order-service="Thesis Support"
-          data-order-price="Rp80.000">
-          Pilih Layanan
-        </button>
-      </article>
+        <div class="services">
+          <article class="service service--feature">
+            <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 19.500V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2"/>
+              <path d="M8 7h6M8 11h8"/>
+            </svg>
+            <h3>Thesis Support</h3>
+            <p>Pendampingan proposal, skripsi, dan tesis: merumuskan masalah, menyusun kerangka, metodologi, revisi, hingga persiapan sidang.</p>
+            <ul><li>Pemetaan topik &amp; kerangka</li><li>Pendampingan per bab</li><li>Persiapan revisi dan sidang</li></ul>
+            <div class="service__price"><span>Mulai dari</span><strong>Rp80.000</strong></div>
+            <button class="btn btn--primary service__btn" type="button" data-order-service="Thesis Support" data-order-price="Rp80.000">Pilih Layanan</button>
+          </article>
 
+          <article class="service service--feature service--navy">
+            <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 20h4L19 9a2.800 2.800 0 0 0-4-4L4 16z"/><path d="m13.500 6.500 4 4"/>
+            </svg>
+            <h3>Academic Writing</h3>
+            <p>Review makalah, editing, proofreading, dan perapian tulisan agar runtut, rapi, dan sesuai kaidah akademik.</p>
+            <ul><li>Perbaikan struktur &amp; tata bahasa</li><li>Review argumen dan alur</li><li>Proofreading akhir</li></ul>
+            <div class="service__price"><span>Mulai dari</span><strong>Rp30.000</strong></div>
+            <button class="btn btn--light service__btn" type="button" data-order-service="Academic Writing" data-order-price="Rp30.000">Pilih Layanan</button>
+          </article>
 
-      <!-- ACADEMIC WRITING -->
-      <article class="service service--feature service--navy">
-        <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 20h4L19 9a2.800 2.800 0 0 0-4-4L4 16z"/>
-          <path d="m13.500 6.500 4 4"/>
-        </svg>
+          <article class="service">
+            <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.500"/><path d="m20 20-4.200-4.200"/>
+            </svg>
+            <h3>Research Support</h3>
+            <p>Bantuan riset, referensi, metodologi, dan konsultasi agar penelitianmu punya fondasi yang kuat.</p>
+            <div class="service__price"><span>Mulai dari</span><strong>Rp55.000</strong></div>
+            <button class="btn btn--primary service__btn" type="button" data-order-service="Research Support" data-order-price="Rp55.000">Pilih Layanan</button>
+          </article>
 
-        <h3>Academic Writing</h3>
+          <article class="service">
+            <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>
+            </svg>
+            <h3>Data &amp; Statistics</h3>
+            <p>Pengolahan dan analisis data dengan Excel dan SPSS, lengkap dengan cara membaca hasilnya.</p>
+            <div class="service__price"><span>Mulai dari</span><strong>Rp80.000</strong></div>
+            <button class="btn btn--primary service__btn" type="button" data-order-service="Data &amp; Statistics" data-order-price="Rp80.000">Pilih Layanan</button>
+          </article>
 
-        <p>
-          Review makalah, editing, proofreading, dan perapian tulisan
-          agar runtut, rapi, dan sesuai kaidah akademik.
-        </p>
+          <article class="service">
+            <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M9 9h6M9 13h6"/>
+            </svg>
+            <h3>Reference Management</h3>
+            <p>Mendeley, Zotero, dan sitasi yang konsisten, jadi daftar pustaka tidak lagi bikin pusing.</p>
+            <div class="service__price"><span>Mulai dari</span><strong>Rp30.000</strong></div>
+            <button class="btn btn--primary service__btn" type="button" data-order-service="Reference Management" data-order-price="Rp30.000">Pilih Layanan</button>
+          </article>
 
-        <ul>
-          <li>Perbaikan struktur &amp; tata bahasa</li>
-          <li>Review argumen dan alur</li>
-          <li>Proofreading akhir</li>
-        </ul>
-
-        <div class="service__price">
-          <span>Mulai dari</span>
-          <strong>Rp30.000</strong>
+          <article class="service service--wide">
+            <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+            <div>
+              <h3>Document &amp; Design</h3>
+              <p>Formatting sesuai pedoman kampus, layout dokumen, dan slide presentasi yang rapi untuk seminar atau sidang.</p>
+              <div class="service__price"><span>Mulai dari</span><strong>Rp30.000</strong></div>
+              <button class="btn btn--primary service__btn" type="button" data-order-service="Document &amp; Design" data-order-price="Rp30.000">Pilih Layanan</button>
+            </div>
+          </article>
         </div>
-
-        <button
-          class="btn btn--light service__btn"
-          type="button"
-          data-order-service="Academic Writing"
-          data-order-price="Rp30.000">
-          Pilih Layanan
-        </button>
-      </article>
-
-
-      <!-- RESEARCH SUPPORT -->
-      <article class="service">
-        <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="11" cy="11" r="6.500"/>
-          <path d="m20 20-4.200-4.200"/>
-        </svg>
-
-        <h3>Research Support</h3>
-
-        <p>
-          Bantuan riset, referensi, metodologi, dan konsultasi
-          agar penelitianmu punya fondasi yang kuat.
-        </p>
-
-        <div class="service__price">
-          <span>Mulai dari</span>
-          <strong>Rp55.000</strong>
-        </div>
-
-        <button
-          class="btn btn--primary service__btn"
-          type="button"
-          data-order-service="Research Support"
-          data-order-price="Rp55.000">
-          Pilih Layanan
-        </button>
-      </article>
-
-
-      <!-- DATA & STATISTICS -->
-      <article class="service">
-        <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>
-        </svg>
-
-        <h3>Data &amp; Statistics</h3>
-
-        <p>
-          Pengolahan dan analisis data dengan Excel dan SPSS,
-          lengkap dengan cara membaca hasilnya.
-        </p>
-
-        <div class="service__price">
-          <span>Mulai dari</span>
-          <strong>Rp80.000</strong>
-        </div>
-
-        <button
-          class="btn btn--primary service__btn"
-          type="button"
-          data-order-service="Data & Statistics"
-          data-order-price="Rp80.000">
-          Pilih Layanan
-        </button>
-      </article>
-
-
-      <!-- REFERENCE MANAGEMENT -->
-      <article class="service">
-        <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/>
-          <path d="M9 9h6M9 13h6"/>
-        </svg>
-
-        <h3>Reference Management</h3>
-
-        <p>
-          Mendeley, Zotero, dan sitasi yang konsisten,
-          jadi daftar pustaka tidak lagi bikin pusing.
-        </p>
-
-        <div class="service__price">
-          <span>Mulai dari</span>
-          <strong>Rp30.000</strong>
-        </div>
-
-        <button
-          class="btn btn--primary service__btn"
-          type="button"
-          data-order-service="Reference Management"
-          data-order-price="Rp30.000">
-          Pilih Layanan
-        </button>
-      </article>
-
-
-      <!-- DOCUMENT & DESIGN -->
-      <article class="service service--wide">
-        <svg class="service__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="13" rx="2"/>
-          <path d="M8 21h8M12 17v4"/>
-        </svg>
-
-        <div>
-          <h3>Document &amp; Design</h3>
-
-          <p>
-            Formatting sesuai pedoman kampus, layout dokumen,
-            dan slide presentasi yang rapi untuk seminar atau sidang.
-          </p>
-
-          <div class="service__price">
-            <span>Mulai dari</span>
-            <strong>Rp30.000</strong>
-          </div>
-
-          <button
-            class="btn btn--primary service__btn"
-            type="button"
-            data-order-service="Document & Design"
-            data-order-price="Rp30.000">
-            Pilih Layanan
-          </button>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ========== ORDER ========== -->
-<section class="section section--order" id="pesan">
-  <div class="wrap order">
-
-    <div class="section__head">
-      <p class="order__eyebrow">Mulai dari kebutuhanmu</p>
-
-      <h2>Ceritakan kebutuhanmu</h2>
-
-      <p>
-        Pilih layanan, isi informasi singkat, lalu lanjutkan konsultasi
-        melalui WhatsApp. Harga yang tampil adalah harga mulai dan dapat
-        disesuaikan berdasarkan kebutuhan pekerjaan.
-      </p>
-    </div>
-
-    <div class="order__progress" aria-label="Tahapan konsultasi">
-      <span class="is-active">1. Layanan</span>
-      <span>2. Detail</span>
-      <span>3. WhatsApp</span>
-    </div>
-
-
-    <form class="order-form" id="orderForm" novalidate>
-
-      <div class="order-card">
-
-        <div class="order-card__head">
-          <div>
-            <span class="order-card__label">Layanan yang dipilih</span>
-
-            <h3 id="selectedService">
-              Belum memilih layanan
-            </h3>
-          </div>
-
-          <div class="order-price">
-            <span>Harga mulai</span>
-            <strong id="selectedPrice">—</strong>
-          </div>
-        </div>
-
-
-        <label for="orderNama">Nama lengkap *</label>
-
-        <input
-          id="orderNama"
-          name="nama"
-          type="text"
-          autocomplete="name"
-          placeholder="Contoh: Budi Santoso"
-          required>
-
-
-        <label for="orderWhatsApp">Nomor WhatsApp *</label>
-
-        <input
-          id="orderWhatsApp"
-          name="whatsapp"
-          type="tel"
-          autocomplete="tel"
-          placeholder="Contoh: 081234567890"
-          required>
-
-
-        <label for="orderKampus">Kampus &amp; jurusan *</label>
-
-        <input
-          id="orderKampus"
-          name="kampus"
-          type="text"
-          placeholder="Contoh: Universitas X, Manajemen"
-          required>
-
-
-        <label for="orderJenis">Jenis pekerjaan *</label>
-
-        <select id="orderJenis" name="jenis" required>
-          <option value="">Pilih jenis pekerjaan</option>
-        </select>
-
-
-        <label for="orderDeadline">Deadline</label>
-
-        <input
-          id="orderDeadline"
-          name="deadline"
-          type="date">
-
-
-        <label for="orderPesan">Ceritakan kebutuhanmu *</label>
-
-        <textarea
-          id="orderPesan"
-          name="pesan"
-          rows="5"
-          placeholder="Contoh: Saya sedang mengerjakan Bab 3 dan membutuhkan review metodologi..."
-          required></textarea>
-
-
-        <p class="order-form__note">
-          🔒 Data yang kamu isi digunakan untuk membantu proses konsultasi
-          dan tidak akan dibagikan untuk keperluan lain.
-        </p>
-
-        <p
-          class="form__error"
-          id="orderError"
-          role="alert"
-          hidden>
-          Lengkapi data yang wajib diisi terlebih dahulu.
-        </p>
-
-
-        <div class="order-form__actions">
-
-          <button
-            class="btn btn--ghost btn--lg"
-            type="button"
-            id="orderReset">
-            Pilih Layanan Lagi
-          </button>
-
-          <button
-            class="btn btn--primary btn--lg"
-            type="submit">
-            Lanjut ke WhatsApp
-          </button>
-
-        </div>
-
       </div>
+    </section>
 
-    </form>
+    <section class="section section--order" id="pesan">
+      <div class="wrap order">
+        <div class="section__head">
+          <p class="order__eyebrow">Mulai dari kebutuhanmu</p>
+          <h2>Ceritakan kebutuhanmu</h2>
+          <p>Pilih layanan, isi informasi singkat, lalu lanjutkan konsultasi melalui WhatsApp. Harga yang tampil adalah harga mulai dan dapat disesuaikan berdasarkan kebutuhan pekerjaan.</p>
+        </div>
 
-  </div>
-</section>
-    <!-- ========== PRINSIP ========== -->
+        <div class="order__progress" aria-label="Tahapan konsultasi">
+          <span class="is-active">1. Layanan</span><span>2. Detail</span><span>3. WhatsApp</span>
+        </div>
+
+        <form class="order-form" id="orderForm" novalidate>
+          <div class="order-card">
+            <div class="order-card__head">
+              <div><span class="order-card__label">Layanan yang dipilih</span><h3 id="selectedService">Belum memilih layanan</h3></div>
+              <div class="order-price"><span>Harga mulai</span><strong id="selectedPrice">—</strong></div>
+            </div>
+
+            <label for="orderNama">Nama lengkap *</label>
+            <input id="orderNama" name="nama" type="text" autocomplete="name" placeholder="Contoh: Budi Santoso" required>
+
+            <label for="orderWhatsApp">Nomor WhatsApp *</label>
+            <input id="orderWhatsApp" name="whatsapp" type="tel" autocomplete="tel" placeholder="Contoh: 081234567890" required>
+
+            <label for="orderKampus">Kampus &amp; jurusan *</label>
+            <input id="orderKampus" name="kampus" type="text" placeholder="Contoh: Universitas X, Manajemen" required>
+
+            <label for="orderJenis">Jenis pekerjaan *</label>
+            <select id="orderJenis" name="jenis" required><option value="">Pilih jenis pekerjaan</option></select>
+
+            <label for="orderDeadline">Deadline</label>
+            <input id="orderDeadline" name="deadline" type="date">
+
+            <label for="orderPesan">Ceritakan kebutuhanmu *</label>
+            <textarea id="orderPesan" name="pesan" rows="5" placeholder="Contoh: Saya sedang mengerjakan Bab 3 dan membutuhkan review metodologi..." required></textarea>
+
+            <p class="order-form__note">🔒 Data yang kamu isi digunakan untuk membantu proses konsultasi dan tidak akan dibagikan untuk keperluan lain.</p>
+            <p class="form__error" id="orderError" role="alert" hidden>Lengkapi data yang wajib diisi terlebih dahulu.</p>
+
+            <div class="order-form__actions">
+              <button class="btn btn--ghost btn--lg" type="button" id="orderReset">Pilih Layanan Lagi</button>
+              <button class="btn btn--primary btn--lg" type="submit">Lanjut ke WhatsApp</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <section class="section section--navy" id="prinsip">
       <div class="wrap principle">
         <div class="principle__lead">
           <h2>Academic Support, bukan Academic Fraud.</h2>
-          <p>
-            Kami hadir sebagai partner. Tujuannya membuatmu lebih paham dan lebih siap,
-            bukan menggantikan proses belajarmu.
-          </p>
+          <p>Kami hadir sebagai partner. Tujuannya membuatmu lebih paham dan lebih siap, bukan menggantikan proses belajarmu.</p>
         </div>
-
         <div class="principle__lists">
           <div class="plist plist--yes">
             <h3>Yang kami lakukan</h3>
-            <ul>
-              <li>Membimbing, mereview, dan memberi masukan</li>
-              <li>Mengedit dan merapikan tulisan milikmu</li>
-              <li>Mengajarkan metode, analisis, dan sitasi</li>
-              <li>Menjaga kerahasiaan data dan dokumenmu</li>
-            </ul>
+            <ul><li>Membimbing, mereview, dan memberi masukan</li><li>Mengedit dan merapikan tulisan milikmu</li><li>Mengajarkan metode, analisis, dan sitasi</li><li>Menjaga kerahasiaan data dan dokumenmu</li></ul>
           </div>
           <div class="plist plist--no">
             <h3>Yang tidak kami lakukan</h3>
-            <ul>
-              <li>Praktik yang melanggar integritas akademik</li>
-              <li>Menjanjikan hasil atau nilai tertentu</li>
-              <li>Membagikan data kliennya kepada pihak lain</li>
-            </ul>
+            <ul><li>Praktik yang melanggar integritas akademik</li><li>Menjanjikan hasil atau nilai tertentu</li><li>Membagikan data kliennya kepada pihak lain</li></ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ========== ALUR ========== -->
     <section class="section" id="alur">
       <div class="wrap">
         <div class="section__head">
           <h2>Cara kerja yang sederhana</h2>
           <p>Dari pesan pertama sampai dokumen final, setiap tahap jelas dan bisa kamu pantau.</p>
         </div>
-
         <ol class="flow">
-          <li>
-            <span class="flow__n">1</span>
-            <h3>Konsultasi</h3>
-            <p>Ceritakan kebutuhanmu lewat WhatsApp atau formulir. Gratis dan tanpa komitmen.</p>
-          </li>
-          <li>
-            <span class="flow__n">2</span>
-            <h3>Rencana &amp; paket</h3>
-            <p>Kami susun lingkup kerja, estimasi waktu, dan biaya yang transparan.</p>
-          </li>
-          <li>
-            <span class="flow__n">3</span>
-            <h3>Pendampingan</h3>
-            <p>Specialist yang sesuai bidangmu mendampingi dengan komunikasi yang terbuka.</p>
-          </li>
-          <li>
-            <span class="flow__n">4</span>
-            <h3>Review &amp; serah terima</h3>
-            <p>Hasil diperiksa bersama, direvisi sesuai kesepakatan, lalu diserahkan tepat waktu.</p>
-          </li>
+          <li><span class="flow__n">1</span><h3>Konsultasi</h3><p>Ceritakan kebutuhanmu lewat WhatsApp atau formulir. Gratis dan tanpa komitmen.</p></li>
+          <li><span class="flow__n">2</span><h3>Rencana &amp; paket</h3><p>Kami susun lingkup kerja, estimasi waktu, dan biaya yang transparan.</p></li>
+          <li><span class="flow__n">3</span><h3>Pendampingan</h3><p>Specialist yang sesuai bidangmu mendampingi dengan komunikasi yang terbuka.</p></li>
+          <li><span class="flow__n">4</span><h3>Review &amp; serah terima</h3><p>Hasil diperiksa bersama, direvisi sesuai kesepakatan, lalu diserahkan tepat waktu.</p></li>
         </ol>
       </div>
     </section>
 
-    <!-- ========== KARAKTER ========== -->
     <section class="section section--tint" aria-labelledby="karakter-title">
       <div class="wrap character">
         <h2 id="karakter-title">Partner yang enak diajak bekerja</h2>
@@ -588,93 +327,49 @@
       </div>
     </section>
 
-    <!-- ========== FAQ ========== -->
     <section class="section" id="faq">
       <div class="wrap faq">
         <div class="section__head section__head--left">
           <h2>Pertanyaan yang sering ditanyakan</h2>
           <p>Belum menemukan jawabanmu? Tanyakan langsung lewat WhatsApp.</p>
         </div>
-
         <div class="faq__list">
-          <details open>
-            <summary>Apakah AKADIVA menyediakan bantuan tugas kuliah dan makalah?</summary>
-            <p>Ya, dalam bentuk pendampingan akademik yang bertanggung jawab. Kami membimbing, mereview, mengedit, dan membantu memahami materi atau menyusun pekerjaanmu. Kami tidak menyediakan joki atau mengerjakan tugas untuk diserahkan sebagai karya sendiri.</p>
-          </details>
-          <details>
-            <summary>Layanan ini untuk jurusan apa saja?</summary>
-            <p>Untuk mahasiswa lintas jurusan dan lintas kampus. Kami mencocokkan kamu dengan specialist yang paham bidangmu.</p>
-          </details>
-          <details>
-            <summary>Berapa biayanya?</summary>
-            <p>Bergantung pada jenis layanan, tingkat kesulitan, dan tenggat waktu. Setelah konsultasi, kamu akan mendapat rincian biaya yang jelas sebelum memulai.</p>
-          </details>
-          <details>
-            <summary>Apakah data dan dokumen saya aman?</summary>
-            <p>Ya. Kerahasiaan adalah bagian dari janji kami. Dokumenmu hanya dipakai untuk keperluan pendampingan yang kamu minta.</p>
-          </details>
-          <details>
-            <summary>Bagaimana cara memulai?</summary>
-            <p>Klik tombol konsultasi atau isi formulir di bawah. Kami akan membalas lewat WhatsApp untuk membahas kebutuhanmu.</p>
-          </details>
+          <details open><summary>Apakah AKADIVA menyediakan bantuan tugas kuliah dan makalah?</summary><p>Ya, dalam bentuk pendampingan akademik yang bertanggung jawab. Kami membimbing, mereview, mengedit, dan membantu memahami materi atau menyusun pekerjaanmu. Kami tidak menyediakan joki atau mengerjakan tugas untuk diserahkan sebagai karya sendiri.</p></details>
+          <details><summary>Layanan ini untuk jurusan apa saja?</summary><p>Untuk mahasiswa lintas jurusan dan lintas kampus. Kami mencocokkan kamu dengan specialist yang paham bidangmu.</p></details>
+          <details><summary>Berapa biayanya?</summary><p>Bergantung pada jenis layanan, tingkat kesulitan, dan tenggat waktu. Setelah konsultasi, kamu akan mendapat rincian biaya yang jelas sebelum memulai.</p></details>
+          <details><summary>Apakah data dan dokumen saya aman?</summary><p>Ya. Kerahasiaan adalah bagian dari janji kami. Dokumenmu hanya dipakai untuk keperluan pendampingan yang kamu minta.</p></details>
+          <details><summary>Bagaimana cara memulai?</summary><p>Klik tombol konsultasi atau isi formulir di bawah. Kami akan membalas lewat WhatsApp untuk membahas kebutuhanmu.</p></details>
         </div>
       </div>
     </section>
 
-    <!-- ========== KONTAK ========== -->
     <section class="section section--cta" id="kontak">
       <div class="wrap contact">
         <div class="contact__copy">
           <p class="contact__script">Better Study, Brighter Future</p>
           <h2>Mulai konsultasi sekarang</h2>
           <p>Ceritakan apa yang sedang kamu hadapi. Kami bantu cari jalan keluarnya, selangkah demi selangkah.</p>
-
-         <ul class="contact__list">
-  <!-- Kontak resmi AKADIVA -->
-  <li>
-    <span>Email</span>
-    <a href="mailto:akadivayourpartner@gmail.com">
-      akadivayourpartner@gmail.com
-    </a>
-  </li>
-
-  <li>
-    <span>WhatsApp</span>
-    <a href="#" data-wa data-wa-label>
-      +62 815 4612 3472
-    </a>
-  </li>
-
-  <li>
-    <span>Lokasi</span>
-    Jakarta, Indonesia
-  </li>
-</ul>
+          <ul class="contact__list">
+            <li><span>Email</span><a href="mailto:akadivayourpartner@gmail.com">akadivayourpartner@gmail.com</a></li>
+            <li><span>WhatsApp</span><a href="#" data-wa data-wa-label>+62 815 4612 3472</a></li>
+            <li><span>Lokasi</span>Jakarta, Indonesia</li>
+          </ul>
         </div>
 
         <form class="form" id="contactForm" novalidate>
           <h3>Kirim pesan lewat WhatsApp</h3>
-
           <label for="f-nama">Nama</label>
           <input id="f-nama" name="nama" type="text" autocomplete="name" placeholder="Nama lengkap" required>
-
           <label for="f-kampus">Kampus &amp; jurusan</label>
           <input id="f-kampus" name="kampus" type="text" placeholder="Contoh: Universitas X, Manajemen">
-
           <label for="f-layanan">Layanan yang dibutuhkan</label>
           <select id="f-layanan" name="layanan">
-            <option>Thesis Support</option>
-            <option>Academic Writing</option>
-            <option>Research Support</option>
-            <option>Data &amp; Statistics</option>
-            <option>Reference Management</option>
-            <option>Document &amp; Design</option>
+            <option>Thesis Support</option><option>Academic Writing</option><option>Research Support</option>
+            <option>Data &amp; Statistics</option><option>Reference Management</option><option>Document &amp; Design</option>
             <option>Belum yakin, ingin konsultasi</option>
           </select>
-
           <label for="f-pesan">Ceritakan kebutuhanmu</label>
           <textarea id="f-pesan" name="pesan" rows="4" placeholder="Tahap yang sedang dikerjakan, kendala, dan tenggat waktu"></textarea>
-
           <p class="form__error" id="formError" role="alert" hidden>Isi nama kamu dulu ya.</p>
           <button class="btn btn--primary btn--lg" type="submit">Lanjut ke WhatsApp</button>
         </form>
@@ -688,44 +383,28 @@
       <div class="footer__brand">
         <a class="brand brand--light" href="#beranda" aria-label="AKADIVA — ke beranda">
           <svg class="brand__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
-          <span class="brand__text">
-            <span class="brand__name">AKADIVA</span>
-            <span class="brand__tag">Your Academic Partner.</span>
-          </span>
+          <span class="brand__text"><span class="brand__name">AKADIVA</span><span class="brand__tag">Your Academic Partner.</span></span>
         </a>
         <p>Partner akademik untuk mahasiswa lintas jurusan.</p>
       </div>
 
       <nav aria-label="Navigasi footer">
         <h4>Navigasi</h4>
-        <a href="#beranda">Beranda</a>
-        <a href="#layanan">Layanan</a>
-        <a href="#prinsip">Prinsip</a>
-        <a href="#alur">Cara kerja</a>
-        <a href="#faq">FAQ</a>
+        <a href="#beranda">Beranda</a><a href="#layanan">Layanan</a><a href="#prinsip">Prinsip</a>
+        <a href="#alur">Cara kerja</a><a href="#faq">FAQ</a>
       </nav>
 
       <nav aria-label="Layanan">
         <h4>Layanan</h4>
-        <a href="#layanan">Thesis Support</a>
-        <a href="#layanan">Academic Writing</a>
-        <a href="#layanan">Research Support</a>
-        <a href="#layanan">Data &amp; Statistics</a>
-        <a href="#layanan">Reference Management</a>
+        <a href="#layanan">Thesis Support</a><a href="#layanan">Academic Writing</a><a href="#layanan">Research Support</a>
+        <a href="#layanan">Data &amp; Statistics</a><a href="#layanan">Reference Management</a>
       </nav>
 
-    <div>
-  <h4>Hubungi kami</h4>
-  <a href="mailto:akadivayourpartner@gmail.com">
-    akadivayourpartner@gmail.com
-  </a>
-
-  <a href="#" data-wa>
-    WhatsApp
-  </a>
-
-  <!-- Tambahkan tautan Instagram / TikTok di sini -->
-</div>
+      <div>
+        <h4>Hubungi kami</h4>
+        <a href="mailto:akadivayourpartner@gmail.com">akadivayourpartner@gmail.com</a>
+        <a href="#" data-wa>WhatsApp</a>
+      </div>
     </div>
 
     <div class="wrap footer__bar">

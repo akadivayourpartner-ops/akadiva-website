@@ -1,6 +1,5 @@
 /* ==========================================================
-   AKADIVA — V2 Lite
-   Layanan → Form Order → WhatsApp
+   AKADIVA — interaksi ringan + alur pemesanan V2 Lite
    ========================================================== */
 
 const WA_NUMBER = "6281546123472";
@@ -12,228 +11,97 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const waLink = (text) =>
   `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
-
-/* ==========================================================
-   WHATSAPP UMUM
-   ========================================================== */
-
 $$("[data-wa]").forEach((a) => {
   a.href = waLink(WA_DEFAULT_TEXT);
   a.target = "_blank";
   a.rel = "noopener";
 });
 
-
-/* Tampilkan nomor WhatsApp */
-
 const label = $("[data-wa-label]");
-
 if (label) {
   const n = WA_NUMBER;
-
-  label.textContent =
-    `+${n.slice(0, 2)} ${n.slice(2, 5)} ${n.slice(5, 9)} ${n.slice(9)}`;
+  label.textContent = `+${n.slice(0, 2)} ${n.slice(2, 5)} ${n.slice(5, 9)} ${n.slice(9)}`;
 }
 
+$("#year").textContent = new Date().getFullYear();
 
-/* Tahun footer */
-
-const year = $("#year");
-
-if (year) {
-  year.textContent = new Date().getFullYear();
-}
-
-
-/* ==========================================================
-   NAVBAR
-   ========================================================== */
-
+/* ---------- Navbar ---------- */
 const nav = $("#nav");
 const toTop = $("#toTop");
 
 function onScroll() {
-
-  if (nav) {
-    nav.classList.toggle(
-      "is-scrolled",
-      window.scrollY > 8
-    );
-  }
-
-  if (toTop) {
-    toTop.hidden = window.scrollY < 700;
-  }
+  nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  toTop.hidden = window.scrollY < 700;
 }
 
-window.addEventListener(
-  "scroll",
-  onScroll,
-  { passive: true }
-);
-
+window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
+toTop.addEventListener("click", () =>
+  window.scrollTo({ top: 0, behavior: "smooth" })
+);
 
-if (toTop) {
-
-  toTop.addEventListener("click", () => {
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  });
-
-}
-
-
-/* ==========================================================
-   MENU MOBILE
-   ========================================================== */
-
+/* ---------- Menu mobile ---------- */
 const toggle = $("#navToggle");
 const menu = $("#menu");
 
 function setMenu(open) {
-
-  if (!menu || !toggle) return;
-
   menu.classList.toggle("is-open", open);
-
-  toggle.setAttribute(
-    "aria-expanded",
-    String(open)
-  );
-
-  toggle.setAttribute(
-    "aria-label",
-    open ? "Tutup menu" : "Buka menu"
-  );
+  toggle.setAttribute("aria-expanded", String(open));
+  toggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
 }
 
+toggle.addEventListener("click", () => {
+  setMenu(toggle.getAttribute("aria-expanded") !== "true");
+});
 
-if (toggle && menu) {
-
-  toggle.addEventListener("click", () => {
-
-    setMenu(
-      toggle.getAttribute("aria-expanded") !== "true"
-    );
-
-  });
-
-  $$("a", menu).forEach((a) => {
-
-    a.addEventListener("click", () => {
-      setMenu(false);
-    });
-
-  });
-
-  document.addEventListener("keydown", (e) => {
-
-    if (e.key === "Escape") {
-      setMenu(false);
-    }
-
-  });
-
-  window
-    .matchMedia("(min-width: 961px)")
-    .addEventListener("change", () => {
-      setMenu(false);
-    });
-
-}
-
-
-/* ==========================================================
-   NAVBAR ACTIVE SECTION
-   ========================================================== */
-
-const links = $$(
-  '.nav__links a[href^="#"]:not(.btn)'
+$$("a", menu).forEach((a) =>
+  a.addEventListener("click", () => setMenu(false))
 );
 
-const sections = links
-  .map((a) => $(a.getAttribute("href")))
-  .filter(Boolean);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") setMenu(false);
+});
 
+window.matchMedia("(min-width: 961px)").addEventListener("change", () =>
+  setMenu(false)
+);
+
+/* ---------- Tandai menu sesuai bagian yang sedang dilihat ---------- */
+const links = $$('.nav__links a[href^="#"]:not(.btn)');
+const sections = links.map((a) => $(a.getAttribute("href"))).filter(Boolean);
 
 if ("IntersectionObserver" in window) {
-
   const io = new IntersectionObserver(
-
     (entries) => {
-
       entries.forEach((entry) => {
-
         if (!entry.isIntersecting) return;
-
-        links.forEach((a) => {
-
+        links.forEach((a) =>
           a.classList.toggle(
             "is-active",
-            a.getAttribute("href") ===
-            `#${entry.target.id}`
-          );
-
-        });
-
+            a.getAttribute("href") === `#${entry.target.id}`
+          )
+        );
       });
-
     },
-
-    {
-      rootMargin: "-45% 0px -50% 0px"
-    }
-
+    { rootMargin: "-45% 0px -50% 0px" }
   );
 
   sections.forEach((s) => io.observe(s));
-
 }
 
-
-/* ==========================================================
-   ORDER V2 LITE
-   ========================================================== */
-
-const serviceButtons =
-  $$("[data-order-service]");
-
-const orderSection =
-  $("#pesan");
-
-const orderForm =
-  $("#orderForm");
-
-const selectedService =
-  $("#selectedService");
-
-const selectedPrice =
-  $("#selectedPrice");
-
-const orderJenis =
-  $("#orderJenis");
-
-const orderError =
-  $("#orderError");
-
-const orderReset =
-  $("#orderReset");
-
+/* ---------- Order / layanan ---------- */
+const orderForm = $("#orderForm");
+const orderError = $("#orderError");
+const selectedService = $("#selectedService");
+const selectedPrice = $("#selectedPrice");
+const orderJenis = $("#orderJenis");
+const orderReset = $("#orderReset");
 
 let currentService = "";
 let currentPrice = "";
 
-
-/* Jenis pekerjaan berdasarkan layanan */
-
 const serviceTypes = {
-
   "Thesis Support": [
     "Proposal",
     "Skripsi",
@@ -243,7 +111,6 @@ const serviceTypes = {
     "Persiapan sidang",
     "Lainnya"
   ],
-
   "Academic Writing": [
     "Makalah",
     "Essay",
@@ -253,7 +120,6 @@ const serviceTypes = {
     "Proofreading",
     "Lainnya"
   ],
-
   "Research Support": [
     "Pencarian referensi",
     "Metodologi penelitian",
@@ -262,7 +128,6 @@ const serviceTypes = {
     "Review penelitian",
     "Lainnya"
   ],
-
   "Data & Statistics": [
     "Excel",
     "SPSS",
@@ -271,7 +136,6 @@ const serviceTypes = {
     "Interpretasi hasil",
     "Lainnya"
   ],
-
   "Reference Management": [
     "Mendeley",
     "Zotero",
@@ -280,7 +144,6 @@ const serviceTypes = {
     "Perapian referensi",
     "Lainnya"
   ],
-
   "Document & Design": [
     "Formatting dokumen",
     "Layout",
@@ -289,291 +152,154 @@ const serviceTypes = {
     "Slide sidang",
     "Lainnya"
   ]
-
 };
 
+function populateTypes(service) {
+  orderJenis.innerHTML =
+    '<option value="">Pilih jenis pekerjaan</option>';
 
-/* Pilih layanan */
+  (serviceTypes[service] || []).forEach((type) => {
+    const option = document.createElement("option");
+    option.value = type;
+    option.textContent = type;
+    orderJenis.appendChild(option);
+  });
+}
 
-function selectService(service, price) {
+$$("[data-order-service]").forEach((button) => {
+  button.addEventListener("click", () => {
+    currentService = button.dataset.orderService || "";
+    currentPrice = button.dataset.orderPrice || "";
 
-  currentService = service;
-  currentPrice = price;
+    selectedService.textContent = currentService || "Belum memilih layanan";
+    selectedPrice.textContent = currentPrice || "—";
 
-  if (selectedService) {
-    selectedService.textContent = service;
-  }
+    populateTypes(currentService);
 
-  if (selectedPrice) {
-    selectedPrice.textContent = price;
-  }
+    orderError.hidden = true;
 
-
-  /* Isi pilihan jenis pekerjaan */
-
-  if (orderJenis) {
-
-    orderJenis.innerHTML =
-      '<option value="">Pilih jenis pekerjaan</option>';
-
-    const types =
-      serviceTypes[service] || ["Lainnya"];
-
-    types.forEach((type) => {
-
-      const option =
-        document.createElement("option");
-
-      option.value = type;
-      option.textContent = type;
-
-      orderJenis.appendChild(option);
-
-    });
-
-  }
-
-
-  /* Aktifkan tahap order */
-
-  if (orderSection) {
-
-    orderSection.scrollIntoView({
+    document.querySelector("#pesan").scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
 
-  }
-
-
-  if (orderError) {
-    orderError.hidden = true;
-  }
-
-}
-
-
-/* Klik tombol layanan */
-
-serviceButtons.forEach((button) => {
-
-  button.addEventListener("click", () => {
-
-    selectService(
-      button.dataset.orderService,
-      button.dataset.orderPrice
-    );
-
+    setTimeout(() => $("#orderNama").focus(), 500);
   });
-
 });
 
+orderReset.addEventListener("click", () => {
+  document.querySelector("#layanan").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
 
-/* Reset layanan */
+function formatDeadline(value) {
+  if (!value) return "Belum ditentukan";
 
-if (orderReset) {
+  const date = new Date(`${value}T00:00:00`);
 
-  orderReset.addEventListener("click", () => {
+  return new Intl.DateTimeFormat("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  }).format(date);
+}
 
-    currentService = "";
-    currentPrice = "";
+orderForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    if (selectedService) {
-      selectedService.textContent =
-        "Belum memilih layanan";
-    }
+  const data = new FormData(orderForm);
 
-    if (selectedPrice) {
-      selectedPrice.textContent = "—";
-    }
+  const nama = (data.get("nama") || "").toString().trim();
+  const whatsapp = (data.get("whatsapp") || "").toString().trim();
+  const kampus = (data.get("kampus") || "").toString().trim();
+  const jenis = (data.get("jenis") || "").toString().trim();
+  const deadline = (data.get("deadline") || "").toString().trim();
+  const pesan = (data.get("pesan") || "").toString().trim();
 
-    if (orderJenis) {
-      orderJenis.innerHTML =
-        '<option value="">Pilih jenis pekerjaan</option>';
-    }
+  if (
+    !currentService ||
+    !nama ||
+    !whatsapp ||
+    !kampus ||
+    !jenis ||
+    !pesan
+  ) {
+    orderError.hidden = false;
 
-    if (orderForm) {
-      orderForm.reset();
-    }
-
-    if (orderSection) {
-
-      orderSection.scrollIntoView({
+    if (!currentService) {
+      document.querySelector("#layanan").scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
-
+    } else if (!nama) {
+      $("#orderNama").focus();
+    } else if (!whatsapp) {
+      $("#orderWhatsApp").focus();
+    } else if (!kampus) {
+      $("#orderKampus").focus();
+    } else if (!jenis) {
+      orderJenis.focus();
+    } else {
+      $("#orderPesan").focus();
     }
 
-  });
+    return;
+  }
 
-}
+  orderError.hidden = true;
 
+  const text = [
+    "Halo AKADIVA, saya ingin konsultasi.",
+    "",
+    `Layanan: ${currentService}`,
+    `Harga mulai: ${currentPrice || "Belum ditentukan"}`,
+    `Nama: ${nama}`,
+    `WhatsApp saya: ${whatsapp}`,
+    `Kampus & jurusan: ${kampus}`,
+    `Jenis pekerjaan: ${jenis}`,
+    `Deadline: ${formatDeadline(deadline)}`,
+    `Kebutuhan: ${pesan}`,
+    "",
+    "Mohon info ketersediaan dan estimasi harga final. Terima kasih."
+  ].join("\n");
 
-/* ==========================================================
-   SUBMIT ORDER → WHATSAPP
-   ========================================================== */
+  window.open(waLink(text), "_blank", "noopener");
+});
 
-if (orderForm) {
+/* ---------- Form kontak lama / kontak umum ---------- */
+const form = $("#contactForm");
+const err = $("#formError");
 
-  orderForm.addEventListener("submit", (e) => {
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    e.preventDefault();
+  const data = new FormData(form);
+  const nama = (data.get("nama") || "").toString().trim();
 
+  if (!nama) {
+    err.hidden = false;
+    $("#f-nama").focus();
+    return;
+  }
 
-    if (!currentService) {
+  err.hidden = true;
 
-      if (orderError) {
-        orderError.textContent =
-          "Pilih layanan terlebih dahulu.";
-        orderError.hidden = false;
-      }
+  const kampus = (data.get("kampus") || "").toString().trim();
+  const layanan = (data.get("layanan") || "").toString();
+  const pesan = (data.get("pesan") || "").toString().trim();
 
-      document
-        .querySelector("#layanan")
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+  const text = [
+    "Halo AKADIVA, saya ingin konsultasi.",
+    "",
+    `Nama: ${nama}`,
+    kampus && `Kampus & jurusan: ${kampus}`,
+    `Layanan: ${layanan}`,
+    pesan && `Kebutuhan: ${pesan}`
+  ]
+    .filter((line) => line !== "" ? Boolean(line) : true)
+    .join("\n");
 
-      return;
-    }
-
-
-    const data =
-      new FormData(orderForm);
-
-
-    const nama =
-      (data.get("nama") || "")
-        .toString()
-        .trim();
-
-    const whatsapp =
-      (data.get("whatsapp") || "")
-        .toString()
-        .trim();
-
-    const kampus =
-      (data.get("kampus") || "")
-        .toString()
-        .trim();
-
-    const jenis =
-      (data.get("jenis") || "")
-        .toString()
-        .trim();
-
-    const deadline =
-      (data.get("deadline") || "")
-        .toString()
-        .trim();
-
-    const pesan =
-      (data.get("pesan") || "")
-        .toString()
-        .trim();
-
-
-    /* Validasi */
-
-    if (
-      !nama ||
-      !whatsapp ||
-      !kampus ||
-      !jenis ||
-      !pesan
-    ) {
-
-      if (orderError) {
-
-        orderError.textContent =
-          "Lengkapi semua data yang wajib diisi terlebih dahulu.";
-
-        orderError.hidden = false;
-
-      }
-
-      return;
-    }
-
-
-    if (orderError) {
-      orderError.hidden = true;
-    }
-
-
-    /* Format tanggal */
-
-    let deadlineText = "Belum ditentukan";
-
-    if (deadline) {
-
-      const date =
-        new Date(`${deadline}T00:00:00`);
-
-      deadlineText =
-        date.toLocaleDateString(
-          "id-ID",
-          {
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-          }
-        );
-
-    }
-
-
-    /* Pesan WhatsApp */
-
-    const text = [
-
-      "Halo AKADIVA, saya ingin konsultasi.",
-
-      "",
-
-      "=== DETAIL KEBUTUHAN ===",
-
-      `Layanan: ${currentService}`,
-
-      `Harga mulai: ${currentPrice}`,
-
-      "",
-
-      `Nama: ${nama}`,
-
-      `WhatsApp: ${whatsapp}`,
-
-      `Kampus & jurusan: ${kampus}`,
-
-      `Jenis pekerjaan: ${jenis}`,
-
-      `Deadline: ${deadlineText}`,
-
-      "",
-
-      "Kebutuhan:",
-
-      pesan,
-
-      "",
-
-      "Mohon informasi lebih lanjut mengenai layanan dan harga finalnya.",
-
-      "Terima kasih."
-
-    ].join("\n");
-
-
-    /* Buka WhatsApp */
-
-    window.open(
-      waLink(text),
-      "_blank",
-      "noopener"
-    );
-
-  });
-
-}
+  window.open(waLink(text), "_blank", "noopener");
+});
