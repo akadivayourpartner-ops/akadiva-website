@@ -596,3 +596,215 @@ p { font-weight: 300; }
     gap: 3.5rem;
   }
 }
+
+/* ==========================================================
+   AKADIVA V2 LITE — Layanan & Order
+   ========================================================== */
+
+.service__price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 20px 0 14px;
+}
+
+.service__price span {
+  font-size: .78rem;
+  opacity: .72;
+}
+
+.service__price strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.service__btn {
+  width: 100%;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.btn--light {
+  background: #fff;
+  color: #0F2A48;
+  border: 1px solid rgba(255,255,255,.7);
+}
+
+.btn--light:hover {
+  background: #EFF4F9;
+}
+
+
+/* ---------- ORDER SECTION ---------- */
+
+.section--order {
+  background: #EFF4F9;
+}
+
+.order {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.order__eyebrow {
+  margin-bottom: 8px;
+  color: #2370BE;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .78rem;
+}
+
+.order__progress {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px auto;
+  flex-wrap: wrap;
+}
+
+.order__progress span {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff;
+  color: #6b7280;
+  font-size: .82rem;
+  font-weight: 600;
+}
+
+.order__progress span.is-active {
+  background: #0F2A48;
+  color: #fff;
+}
+
+
+.order-card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(15,42,72,.10);
+}
+
+.order-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e8edf2;
+}
+
+.order-card__label,
+.order-price span {
+  display: block;
+  font-size: .78rem;
+  color: #718096;
+  margin-bottom: 5px;
+}
+
+.order-card__head h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.order-price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.order-price strong {
+  display: block;
+  color: #2370BE;
+  font-size: 1.15rem;
+}
+
+
+.order-form label {
+  display: block;
+  margin: 18px 0 7px;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.order-form input,
+.order-form select,
+.order-form textarea {
+  width: 100%;
+  border: 1px solid #d9e1e8;
+  border-radius: 12px;
+  padding: 13px 14px;
+  font: inherit;
+  color: #2D343C;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.order-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.order-form input:focus,
+.order-form select:focus,
+.order-form textarea:focus {
+  outline: none;
+  border-color: #2370BE;
+  box-shadow: 0 0 0 3px rgba(35,112,190,.10);
+}
+
+
+.order-form__note {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  background: #f7f9fb;
+  border-radius: 10px;
+  color: #68737d;
+  font-size: .82rem;
+  line-height: 1.6;
+}
+
+.order-form__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.order-form__actions .btn {
+  flex: 1;
+}
+
+.order-form .form__error {
+  margin-top: 14px;
+  color: #b42318;
+  font-size: .86rem;
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 640px) {
+
+  .order-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .order-card__head {
+    flex-direction: column;
+  }
+
+  .order-price {
+    text-align: left;
+  }
+
+  .order-form__actions {
+    flex-direction: column-reverse;
+  }
+
+  .order__progress {
+    justify-content: flex-start;
+  }
+}
