@@ -14,7 +14,7 @@ const waLink = (text) =>
 $$("[data-wa]").forEach((a) => {
   a.href = waLink(WA_DEFAULT_TEXT);
   a.target = "_blank";
-  a.rel = "noopener";
+  a.rel = "noopener noreferrer";
 });
 
 const label = $("[data-wa-label]");
@@ -23,7 +23,8 @@ if (label) {
   label.textContent = `+${n.slice(0, 2)} ${n.slice(2, 5)} ${n.slice(5, 9)} ${n.slice(9)}`;
 }
 
-$("#year").textContent = new Date().getFullYear();
+const yearEl = $("#year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 /* ---------- Navbar ---------- */
 const nav = $("#nav");
@@ -95,70 +96,56 @@ const orderForm = $("#orderForm");
 const orderError = $("#orderError");
 const selectedService = $("#selectedService");
 const selectedPrice = $("#selectedPrice");
+const orderLayanan = $("#orderLayanan");
 const orderJenis = $("#orderJenis");
 const orderReset = $("#orderReset");
+const orderDeadline = $("#orderDeadline");
 
-let currentService = "";
-let currentPrice = "";
-
-const serviceTypes = {
-  "Thesis Support": [
-    "Proposal",
-    "Skripsi",
-    "Tesis",
-    "Revisi",
-    "Metodologi",
-    "Persiapan sidang",
-    "Lainnya"
-  ],
-  "Academic Writing": [
-    "Makalah",
-    "Essay",
-    "Artikel",
-    "Review paper",
-    "Editing",
-    "Proofreading",
-    "Lainnya"
-  ],
-  "Research Support": [
-    "Pencarian referensi",
-    "Metodologi penelitian",
-    "Penyusunan instrumen",
-    "Konsultasi penelitian",
-    "Review penelitian",
-    "Lainnya"
-  ],
-  "Data & Statistics": [
-    "Excel",
-    "SPSS",
-    "Analisis data",
-    "Uji statistik",
-    "Interpretasi hasil",
-    "Lainnya"
-  ],
-  "Reference Management": [
-    "Mendeley",
-    "Zotero",
-    "Sitasi",
-    "Daftar pustaka",
-    "Perapian referensi",
-    "Lainnya"
-  ],
-  "Document & Design": [
-    "Formatting dokumen",
-    "Layout",
-    "PowerPoint",
-    "Slide seminar",
-    "Slide sidang",
-    "Lainnya"
-  ]
+const services = {
+  "Thesis Support": {
+    price: "Rp80.000",
+    types: ["Pendampingan proposal", "Pendampingan skripsi", "Pendampingan tesis", "Pendampingan revisi", "Konsultasi metodologi", "Persiapan sidang", "Lainnya"]
+  },
+  "Academic Writing": {
+    price: "Rp30.000",
+    types: ["Review makalah", "Review essay", "Review artikel", "Editing", "Proofreading", "Konsultasi struktur tulisan", "Lainnya"]
+  },
+  "Research Support": {
+    price: "Rp55.000",
+    types: ["Pencarian referensi", "Konsultasi metodologi", "Penyusunan instrumen", "Konsultasi penelitian", "Review penelitian", "Lainnya"]
+  },
+  "Data & Statistics": {
+    price: "Rp80.000",
+    types: ["Pengolahan data Excel", "Pengolahan data SPSS", "Pemilihan uji statistik", "Interpretasi hasil", "Lainnya"]
+  },
+  "Reference Management": {
+    price: "Rp30.000",
+    types: ["Mendeley", "Zotero", "Gaya sitasi", "Perapian daftar pustaka", "Lainnya"]
+  },
+  "Document & Design": {
+    price: "Rp30.000",
+    types: ["Formatting dokumen", "Layout", "Slide seminar", "Slide sidang", "Lainnya"]
+  }
 };
 
-function populateTypes(service) {
-  orderJenis.innerHTML =
-    '<option value="">Pilih jenis pekerjaan</option>';
+let currentService = "";
 
-  (serviceTypes[service] || []).forEach((type) => {
+function setStep(step, done = false) {
+  $$(".order__progress [data-step]").forEach((el) => {
+    const n = Number(el.dataset.step);
+    el.classList.toggle("is-active", n === step && !done);
+    el.classList.toggle("is-done", n < step || (done && n <= step));
+  });
+}
+
+function populateTypes(service) {
+  orderJenis.innerHTML = "";
+  const first = document.createElement("option");
+  first.value = "";
+  first.textContent = service ? "Pilih jenis pendampingan" : "Pilih layanan dulu";
+  orderJenis.appendChild(first);
+
+  ((services[service] && services[service].types) || []).forEach((type) => {
     const option = document.createElement("option");
     option.value = type;
     option.textContent = type;
@@ -166,140 +153,131 @@ function populateTypes(service) {
   });
 }
 
+function selectService(service) {
+  currentService = services[service] ? service : "";
+  const info = services[currentService];
+
+  selectedService.textContent = currentService || "Belum memilih layanan";
+  selectedPrice.textContent = info ? info.price : "—";
+  orderLayanan.value = currentService;
+  populateTypes(currentService);
+  setStep(currentService ? 2 : 1);
+}
+
+if (orderDeadline) {
+  const t = new Date();
+  orderDeadline.min = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+}
+
 $$("[data-order-service]").forEach((button) => {
   button.addEventListener("click", () => {
-    currentService = button.dataset.orderService || "";
-    currentPrice = button.dataset.orderPrice || "";
-
-    selectedService.textContent = currentService || "Belum memilih layanan";
-    selectedPrice.textContent = currentPrice || "—";
-
-    populateTypes(currentService);
-
-    orderError.hidden = true;
-
-    document.querySelector("#pesan").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-    setTimeout(() => $("#orderNama").focus(), 500);
+    selectService(button.dataset.orderService || "");
+    clearErrors();
+    $("#pesan").scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => $("#orderNama").focus({ preventScroll: true }), 500);
   });
 });
 
+orderLayanan.addEventListener("change", () => {
+  selectService(orderLayanan.value);
+  orderLayanan.removeAttribute("aria-invalid");
+});
+
 orderReset.addEventListener("click", () => {
-  document.querySelector("#layanan").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+  $("#layanan").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 function formatDeadline(value) {
   if (!value) return "Belum ditentukan";
-
   const date = new Date(`${value}T00:00:00`);
-
-  return new Intl.DateTimeFormat("id-ID", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  }).format(date);
+  return new Intl.DateTimeFormat("id-ID", { day: "2-digit", month: "long", year: "numeric" }).format(date);
 }
+
+function clearErrors() {
+  orderError.hidden = true;
+  $$(".field-error", orderForm).forEach((el) => el.remove());
+  $$("[aria-invalid]", orderForm).forEach((el) => el.removeAttribute("aria-invalid"));
+}
+
+function showFieldError(field, message) {
+  field.setAttribute("aria-invalid", "true");
+  const note = document.createElement("span");
+  note.className = "field-error";
+  note.setAttribute("role", "alert");
+  note.textContent = message;
+  field.insertAdjacentElement("afterend", note);
+}
+
+function openWhatsApp(text) {
+  const url = waLink(text);
+  const win = window.open(url, "_blank");
+  if (win) win.opener = null;
+  else window.location.href = url;
+}
+
+function validPhone(value) {
+  const digits = value.replace(/\D/g, "");
+  return digits.length >= 9 && digits.length <= 15;
+}
+
+orderForm.addEventListener("input", (e) => {
+  const f = e.target;
+  if (f.getAttribute && f.getAttribute("aria-invalid")) {
+    f.removeAttribute("aria-invalid");
+    const next = f.nextElementSibling;
+    if (next && next.classList.contains("field-error")) next.remove();
+  }
+});
 
 orderForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  clearErrors();
 
   const data = new FormData(orderForm);
+  const get = (k) => (data.get(k) || "").toString().trim();
 
-  const nama = (data.get("nama") || "").toString().trim();
-  const whatsapp = (data.get("whatsapp") || "").toString().trim();
-  const kampus = (data.get("kampus") || "").toString().trim();
-  const jenis = (data.get("jenis") || "").toString().trim();
-  const deadline = (data.get("deadline") || "").toString().trim();
-  const pesan = (data.get("pesan") || "").toString().trim();
+  const nama = get("nama");
+  const whatsapp = get("whatsapp");
+  const kampus = get("kampus");
+  const jenis = get("jenis");
+  const deadline = get("deadline");
+  const pesan = get("pesan");
 
-  if (
-    !currentService ||
-    !nama ||
-    !whatsapp ||
-    !kampus ||
-    !jenis ||
-    !pesan
-  ) {
+  const checks = [
+    [orderLayanan, currentService, "Pilih layanan terlebih dahulu."],
+    [$("#orderNama"), nama, "Nama wajib diisi."],
+    [$("#orderWhatsApp"), whatsapp && validPhone(whatsapp), whatsapp ? "Nomor WhatsApp belum valid (9–15 angka)." : "Nomor WhatsApp wajib diisi."],
+    [$("#orderKampus"), kampus, "Kampus & jurusan wajib diisi."],
+    [orderJenis, jenis, "Pilih jenis pendampingan."],
+    [$("#orderPesan"), pesan, "Ceritakan kebutuhanmu secara singkat."]
+  ];
+
+  const failed = checks.filter(([, ok]) => !ok);
+
+  if (failed.length) {
+    failed.forEach(([field, , msg]) => showFieldError(field, msg));
     orderError.hidden = false;
-
-    if (!currentService) {
-      document.querySelector("#layanan").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    } else if (!nama) {
-      $("#orderNama").focus();
-    } else if (!whatsapp) {
-      $("#orderWhatsApp").focus();
-    } else if (!kampus) {
-      $("#orderKampus").focus();
-    } else if (!jenis) {
-      orderJenis.focus();
-    } else {
-      $("#orderPesan").focus();
-    }
-
+    failed[0][0].focus();
     return;
   }
-
-  orderError.hidden = true;
 
   const text = [
     "Halo AKADIVA, saya ingin konsultasi.",
     "",
     `Layanan: ${currentService}`,
-    `Harga mulai: ${currentPrice || "Belum ditentukan"}`,
+    `Harga mulai: ${services[currentService].price}`,
     `Nama: ${nama}`,
     `WhatsApp saya: ${whatsapp}`,
     `Kampus & jurusan: ${kampus}`,
-    `Jenis pekerjaan: ${jenis}`,
+    `Jenis pendampingan: ${jenis}`,
     `Deadline: ${formatDeadline(deadline)}`,
     `Kebutuhan: ${pesan}`,
     "",
-    "Mohon info ketersediaan dan estimasi harga final. Terima kasih."
+    "Mohon info ketersediaan dan estimasi biaya. Terima kasih."
   ].join("\n");
 
-  window.open(waLink(text), "_blank", "noopener");
+  setStep(3);
+  openWhatsApp(text);
 });
 
-/* ---------- Form kontak lama / kontak umum ---------- */
-const form = $("#contactForm");
-const err = $("#formError");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const data = new FormData(form);
-  const nama = (data.get("nama") || "").toString().trim();
-
-  if (!nama) {
-    err.hidden = false;
-    $("#f-nama").focus();
-    return;
-  }
-
-  err.hidden = true;
-
-  const kampus = (data.get("kampus") || "").toString().trim();
-  const layanan = (data.get("layanan") || "").toString();
-  const pesan = (data.get("pesan") || "").toString().trim();
-
-  const text = [
-    "Halo AKADIVA, saya ingin konsultasi.",
-    "",
-    `Nama: ${nama}`,
-    kampus && `Kampus & jurusan: ${kampus}`,
-    `Layanan: ${layanan}`,
-    pesan && `Kebutuhan: ${pesan}`
-  ]
-    .filter((line) => line !== "" ? Boolean(line) : true)
-    .join("\n");
-
-  window.open(waLink(text), "_blank", "noopener");
-});
+selectService("");
